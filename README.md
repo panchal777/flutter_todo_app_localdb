@@ -12,3 +12,8 @@ Follow the steps below to set up and run the project locally:
 flutter clean
 flutter pub get
 flutter packages pub run build_runner build
+
+## 📸 Screenshots
+
+### Dashboard Screen
+![Dashboard Screen](assets/screenshots/dashboard.png)
