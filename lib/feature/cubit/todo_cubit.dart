@@ -16,8 +16,9 @@ class TodoCubit extends Cubit<TodoCubitState> {
 
   TodoCubit() : super(StateInitial());
 
-  getTodoList({bool isDrift = false}) async {
-    todoList = await todoRepository.getTodoList(isDrift: isDrift);
+  getTodoList() async {
+    emit(StateLoading());
+    todoList = await todoRepository.getTodoList();
     emit(
       SuccessState(
         msg: successMsg,
@@ -27,8 +28,8 @@ class TodoCubit extends Cubit<TodoCubitState> {
     );
   }
 
-  addItemToList(TodoModel todoModel, {bool isDrift = false}) async {
-    todoList = await todoRepository.addItem(todoModel, isDrift: isDrift);
+  addItemToList(TodoModel todoModel) async {
+    todoList = await todoRepository.addItem(todoModel);
     emit(
       SuccessState(
         msg: addSuccessMsg,
@@ -38,8 +39,8 @@ class TodoCubit extends Cubit<TodoCubitState> {
     );
   }
 
-  editItemToList(int index, TodoModel todoModel, {bool isDrift = false}) async {
-    todoList = await todoRepository.editItem(todoModel, isDrift: isDrift);
+  editItemToList(int index, TodoModel todoModel) async {
+    todoList = await todoRepository.editItem(todoModel);
     emit(
       SuccessState(
         msg: editSuccessMsg,
@@ -49,8 +50,8 @@ class TodoCubit extends Cubit<TodoCubitState> {
     );
   }
 
-  deleteItemToList(String id, {bool isDrift = false}) async {
-    todoList = await todoRepository.deleteItem(id, isDrift: isDrift);
+  deleteItemFromList(String id) async {
+    todoList = await todoRepository.deleteItem(id);
     emit(
       SuccessState(
         msg: deleteSuccessMsg,

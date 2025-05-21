@@ -40,8 +40,10 @@ dependencies:
   hive_flutter: ^1.1.0
   hive_generator: ^2.0.1
   drift: ^2.26.1
-  sqlite3: ^2.7.5
+  sqlite3_flutter_libs: ^0.5.32
   drift_flutter:
+  path:
+  fluttertoast: ^8.2.12
 
 dev_dependencies:
   flutter_test:

@@ -18,9 +18,13 @@ class DashboardPage extends StatelessWidget {
           return Card(
             margin: EdgeInsets.only(bottom: 8),
             child: ListTile(
-              title: Text(data.label),
+              tileColor: data.color,
+              title: Text(
+                data.label,
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
               onTap: () {
-                navigateToNextPage(data.routName, context);
+                navigateToNextPage(data.routName, context, data);
               },
             ),
           );
@@ -29,7 +33,15 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
-  navigateToNextPage(String routName, BuildContext context) {
-    Navigator.pushNamed(context, routName);
+  navigateToNextPage(
+    String routName,
+    BuildContext context,
+    DashboardModel data,
+  ) {
+    Navigator.pushNamed(
+      context,
+      routName,
+      arguments: {"appBarColor": data.color},
+    );
   }
 }

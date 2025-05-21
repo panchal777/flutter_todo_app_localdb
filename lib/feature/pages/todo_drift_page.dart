@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../components/todo_list_component.dart';
-import '../cubit/todo_cubit.dart';
+import 'package:flutter_todo_app_localdb/feature/components/user_list_component.dart';
+import 'package:flutter_todo_app_localdb/feature/cubit/user_cubit.dart';
 
 class TodoDriftPage extends StatelessWidget {
-  const TodoDriftPage({super.key});
+  final Color? appBarColor;
+
+  const TodoDriftPage({super.key, this.appBarColor});
 
   @override
   Widget build(BuildContext context) {
-    return TodoListComponent(
+    return UserListComponent(
+      appBarColor: appBarColor,
       title: 'CRUD (DRIFT)',
       addItem: (todoModel) {
-        context.read<TodoCubit>().addItemToList(todoModel, isDrift: true);
+        context.read<UserCubit>().addItemToList(todoModel);
       },
       editItem: (todoModel, index) {
-        context.read<TodoCubit>().editItemToList(
-          index,
-          todoModel,
-          isDrift: true,
-        );
+        context.read<UserCubit>().editItemToList(index, todoModel);
       },
-      deleteItem: (index,id) {
-        context.read<TodoCubit>().deleteItemToList(id, isDrift: true);
+      deleteItem: (index, id) {
+        context.read<UserCubit>().deleteItemFromList(id);
       },
     );
   }

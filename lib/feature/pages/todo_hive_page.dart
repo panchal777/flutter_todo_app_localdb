@@ -5,11 +5,14 @@ import '../components/todo_list_component.dart';
 import '../cubit/todo_cubit.dart';
 
 class TodoHivePage extends StatelessWidget {
-  const TodoHivePage({super.key});
+  final Color? appBarColor;
+
+  const TodoHivePage({super.key, this.appBarColor});
 
   @override
   Widget build(BuildContext context) {
     return TodoListComponent(
+      appBarColor: appBarColor,
       title: 'CRUD (HIVE)',
       addItem: (todoModel) {
         context.read<TodoCubit>().addItemToList(todoModel);
@@ -17,8 +20,8 @@ class TodoHivePage extends StatelessWidget {
       editItem: (todoModel, index) {
         context.read<TodoCubit>().editItemToList(index, todoModel);
       },
-      deleteItem: (index,id) {
-        context.read<TodoCubit>().deleteItemToList(id);
+      deleteItem: (index, id) {
+        context.read<TodoCubit>().deleteItemFromList(id);
       },
     );
   }
