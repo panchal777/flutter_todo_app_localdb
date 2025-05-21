@@ -13,6 +13,8 @@ flutter clean
 flutter pub get
 flutter packages pub run build_runner build
 
+```
+
 ## 📸 Screenshots
 
 ### Dashboard Screen
