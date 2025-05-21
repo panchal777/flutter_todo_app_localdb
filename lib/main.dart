@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todo_app_localdb/pages/dashboard_page.dart';
-import 'package:flutter_todo_app_localdb/pages/todo_hive_page.dart';
-import 'package:flutter_todo_app_localdb/routes/route_name.dart';
 
-import 'cubit/todo_cubit.dart';
-import 'services/hive_service.dart';
+import 'core/routes/route_name.dart';
+import 'core/services/hive_service.dart';
+import 'feature/cubit/todo_cubit.dart';
+import 'feature/pages/dashboard_page.dart';
+import 'feature/pages/todo_hive_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

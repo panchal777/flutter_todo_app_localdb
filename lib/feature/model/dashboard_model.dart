@@ -1,4 +1,5 @@
-import '../routes/route_name.dart';
+
+import '../../core/routes/route_name.dart';
 
 class DashboardModel {
   String label;

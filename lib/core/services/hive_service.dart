@@ -1,7 +1,8 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../model/todo_model.dart';
+import '../../feature/model/todo_model.dart';
+
 
 class HiveService {
   static final HiveService _instance = HiveService._internal();

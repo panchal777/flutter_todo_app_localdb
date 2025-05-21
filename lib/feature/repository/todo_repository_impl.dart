@@ -1,6 +1,6 @@
-import 'package:flutter_todo_app_localdb/model/todo_model.dart';
-import 'package:flutter_todo_app_localdb/services/hive_service.dart';
-import '../core/utils.dart';
+import '../../core/services/hive_service.dart';
+import '../../core/utils.dart';
+import '../model/todo_model.dart';
 import 'todo_repository.dart';
 
 class TodoRepositoryImpl extends TodoRepository {

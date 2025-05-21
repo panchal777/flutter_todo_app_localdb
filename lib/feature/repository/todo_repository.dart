@@ -1,4 +1,5 @@
-import 'package:flutter_todo_app_localdb/model/todo_model.dart';
+
+import '../model/todo_model.dart';
 
 abstract class TodoRepository {
   Future<List<TodoModel>> addItem(TodoModel todoModel, {bool isDrift = false});

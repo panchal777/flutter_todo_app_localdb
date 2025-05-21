@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app_localdb/model/dashboard_model.dart';
+import '../model/dashboard_model.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
