@@ -1,13 +1,14 @@
-# flutter_todo_app_localdb
+# 📝 Flutter Todo App with Local Database
 
-This project contains offline storage techniques with hive, drift database
+A Flutter application demonstrating offline storage techniques using both **Hive (NoSQL)** and **Drift (SQL)** databases. The app includes full **CRUD operations** and is designed to showcase how to manage persistent local data in Flutter.
 
-## Getting Started
+---
 
+## 🚀 Getting Started
+
+Follow the steps below to set up and run the project locally:
+
+```bash
 flutter clean
 flutter pub get
 flutter packages pub run build_runner build
-
-Generate the g.dart classes for hive and drift database.
-
-App consists of CRUD operations with Hive(NoSql) and Drift(SQL) database for offline storage. Refer services and respository_impl class for better understanding.
