@@ -17,5 +17,18 @@ flutter packages pub run build_runner build
 
 ## 📸 Screenshots
 
+CRUD with HIVE and Drift 
+
 ### Dashboard Screen
-![Dashboard Screen](assets/screenshots/dashboard.png)
+<img src="assets/screenshots/dashboard.png" alt="App Screenshot" width="300" height="500">
+
+### Hive CRUD Operations
+<img src="assets/screenshots/hive_page.png" alt="App Screenshot" width="300" height="500">
+<img src="assets/screenshots/hive_add_item.png" alt="App Screenshot" width="300" height="500">
+<img src="assets/screenshots/hive_edit_delete.png" alt="App Screenshot" width="300" height="500">
+
+### Drift CRUD Operations
+<img src="assets/screenshots/drift_page.png" alt="App Screenshot" width="300" height="500">
+<img src="assets/screenshots/drift_add_user.png" alt="App Screenshot" width="300" height="500">
+
+
