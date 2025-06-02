@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 import 'package:flutter_todo_app_localdb/core/routes/route_name.dart'
     show RouteName;
-import 'package:flutter_todo_app_localdb/feature/cubit/isar/isar_cubit.dart';
-import '../../feature/pages/todo_isar_page.dart';
 import '../../feature/cubit/hive/todo_cubit.dart' show TodoCubit;
 import '../../feature/cubit/drift/user_cubit.dart' show UserCubit;
 import '../../feature/pages/dashboard_page.dart' show DashboardPage;
@@ -33,17 +31,6 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       BlocProvider(
         create: (_) => UserCubit()..getUserList(),
         child: TodoDriftPage(appBarColor: appBarColor),
-      ),
-    );
-  } else if (settings.name == RouteName.isar) {
-    var arguments = settings.arguments as Map<String, dynamic>;
-    var appBarColor = arguments['appBarColor'];
-
-    return _buildRoute(
-      settings,
-      BlocProvider(
-        create: (_) => IsarCubit()..getUserList(),
-        child: TodoIsarPage(appBarColor: appBarColor),
       ),
     );
   }
