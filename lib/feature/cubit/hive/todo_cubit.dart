@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../model/todo_model.dart';
-import '../repository/todo_repository.dart';
-import '../repository/todo_repository_impl.dart';
-import 'todo_states.dart';
+import 'package:flutter_todo_app_localdb/feature/cubit/hive/todo_states.dart';
+import '../../model/todo_model.dart';
+import '../../repository/todo_repository.dart';
+import '../../repository/todo_repository_impl.dart';
 
 class TodoCubit extends Cubit<TodoCubitState> {
   List<TodoModel> todoList = [];

@@ -1,4 +1,5 @@
-import '../model/todo_model.dart';
+import 'package:flutter_todo_app_localdb/feature/model/todo_model.dart'
+    show TodoModel;
 
 enum SuccessEnum { add, edit, delete, fetch }
 

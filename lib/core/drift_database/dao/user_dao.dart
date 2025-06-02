@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_todo_app_localdb/core/drift_database/models/user.dart';
 
-import '../app_database.dart';
+import 'package:flutter_todo_app_localdb/core/drift_database/app_database.dart';
 
 part 'user_dao.g.dart';
 

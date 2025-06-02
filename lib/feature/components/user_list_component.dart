@@ -3,19 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_todo_app_localdb/core/drift_database/app_database.dart';
 import 'package:flutter_todo_app_localdb/core/utils/utils.dart';
-import 'package:flutter_todo_app_localdb/feature/cubit/user_cubit.dart';
-import 'package:flutter_todo_app_localdb/feature/cubit/user_state.dart';
-
+import 'package:flutter_todo_app_localdb/feature/cubit/drift/user_cubit.dart'
+    show UserCubit;
+import 'package:flutter_todo_app_localdb/feature/cubit/drift/user_state.dart'
+    show StateLoading, SuccessEnum, SuccessState, UserState;
 import 'add_edit_widget.dart';
 
-class UserListComponent extends StatefulWidget {
+class DriftUserListComponent extends StatefulWidget {
   final Color? appBarColor;
   final String title;
-  final Function(UserModelData todoModel) addItem;
-  final Function(UserModelData todoModel, int index) editItem;
+  final Function(UserModelData userModel) addItem;
+  final Function(UserModelData userModel, int index) editItem;
   final Function(int index, int id) deleteItem;
 
-  const UserListComponent({
+  const DriftUserListComponent({
     super.key,
     this.appBarColor,
     this.title = 'CRUD Operations',
@@ -25,10 +26,10 @@ class UserListComponent extends StatefulWidget {
   });
 
   @override
-  State<UserListComponent> createState() => _UserListComponentState();
+  State<DriftUserListComponent> createState() => _DriftUserListComponentState();
 }
 
-class _UserListComponentState extends State<UserListComponent> {
+class _DriftUserListComponentState extends State<DriftUserListComponent> {
   List<UserModelData> userList = [];
 
   @override

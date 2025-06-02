@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todo_app_localdb/feature/components/user_list_component.dart';
-import 'package:flutter_todo_app_localdb/feature/cubit/user_cubit.dart';
+import '../components/user_list_component.dart';
+import '../cubit/drift/user_cubit.dart';
 
 class TodoDriftPage extends StatelessWidget {
   final Color? appBarColor;
@@ -10,14 +10,14 @@ class TodoDriftPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UserListComponent(
+    return DriftUserListComponent(
       appBarColor: appBarColor,
       title: 'CRUD (DRIFT)',
-      addItem: (todoModel) {
-        context.read<UserCubit>().addItemToList(todoModel);
+      addItem: (userModel) {
+        context.read<UserCubit>().addItemToList(userModel);
       },
-      editItem: (todoModel, index) {
-        context.read<UserCubit>().editItemToList(index, todoModel);
+      editItem: (userModel, index) {
+        context.read<UserCubit>().editItemToList(index, userModel);
       },
       deleteItem: (index, id) {
         context.read<UserCubit>().deleteItemFromList(id);

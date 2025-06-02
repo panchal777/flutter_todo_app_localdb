@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo_app_localdb/core/drift_database/app_database.dart';
-import 'package:flutter_todo_app_localdb/feature/cubit/user_state.dart';
+import 'package:flutter_todo_app_localdb/feature/cubit/drift/user_state.dart';
 import 'package:flutter_todo_app_localdb/feature/repository/user_repository.dart';
-import '../repository/user_repository_impl.dart';
+import '../../repository/user_repository_impl.dart';
 
 class UserCubit extends Cubit<UserState> {
   List<UserModelData> userList = [];
