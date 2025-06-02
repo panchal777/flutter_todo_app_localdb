@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_todo_app_localdb/core/drift_database/app_database.dart';
 import 'package:flutter_todo_app_localdb/core/utils/utils.dart';
-import 'package:flutter_todo_app_localdb/feature/components/add_edit_widget.dart';
-import 'package:flutter_todo_app_localdb/feature/cubit/hive/todo_cubit.dart' show TodoCubit;
-import 'package:flutter_todo_app_localdb/feature/cubit/hive/todo_states.dart' show StateLoading, SuccessEnum, SuccessState, TodoCubitState;
-import 'package:flutter_todo_app_localdb/feature/model/todo_model.dart';
+import 'package:flutter_todo_app_localdb/feature/cubit/isar/isar_cubit.dart'
+    show IsarCubit;
+import 'package:flutter_todo_app_localdb/feature/cubit/isar/isar_states.dart'
+    show IsarStates, StateLoading, SuccessEnum, SuccessState;
 
-class HiveTodoListComponent extends StatefulWidget {
+import 'add_edit_widget.dart';
+
+class IsarListComponent extends StatefulWidget {
   final Color? appBarColor;
   final String title;
-  final Function(TodoModel todoModel) addItem;
-  final Function(TodoModel todoModel, int index) editItem;
-  final Function(int index, String id) deleteItem;
+  final Function(UserModelData userModel) addItem;
+  final Function(UserModelData userModel, int index) editItem;
+  final Function(int index, int id) deleteItem;
 
-  const HiveTodoListComponent({
+  const IsarListComponent({
     super.key,
     this.appBarColor,
     this.title = 'CRUD Operations',
@@ -24,11 +27,11 @@ class HiveTodoListComponent extends StatefulWidget {
   });
 
   @override
-  State<HiveTodoListComponent> createState() => _HiveTodoListComponentState();
+  State<IsarListComponent> createState() => _IsarListComponentState();
 }
 
-class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
-  List<TodoModel> todoList = [];
+class _IsarListComponentState extends State<IsarListComponent> {
+  List<UserModelData> userList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
             ),
           ],
         ),
-        body: BlocListener<TodoCubit, TodoCubitState>(
+        body: BlocListener<IsarCubit, IsarStates>(
           listener: (context, state) {
             if (state is SuccessState) {
               if (state.type != SuccessEnum.fetch) {
@@ -54,26 +57,26 @@ class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
               }
             }
           },
-          child: BlocBuilder<TodoCubit, TodoCubitState>(
+          child: BlocBuilder<IsarCubit, IsarStates>(
             builder: (context, state) {
               if (state is SuccessState) {
-                todoList = state.todoList;
+                // userList = state.userList;
               }
 
               return state is StateLoading
                   ? Center(child: CircularProgressIndicator())
-                  : todoList.isEmpty
+                  : userList.isEmpty
                   ? Center(child: Text("No Records Found"))
                   : ListView.builder(
                     padding: EdgeInsets.all(10),
-                    itemCount: todoList.length,
+                    itemCount: userList.length,
                     itemBuilder: (context, index) {
-                      var data = todoList[index];
+                      var data = userList[index];
                       return Padding(
-                        padding: const EdgeInsets.only(bottom: 2),
+                        padding: const EdgeInsets.only(bottom: 2.0),
                         child: Slidable(
                           enabled: true,
-                          key: Key("value$index${data.item}"),
+                          key: Key("value$index${data.id}"),
                           endActionPane: ActionPane(
                             motion: const ScrollMotion(),
                             children: [
@@ -83,7 +86,7 @@ class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
                                   _showInputDialog(
                                     isEdit: true,
                                     index: index,
-                                    todoModel: data,
+                                    userModel: data,
                                   );
                                 },
                                 backgroundColor: Color(0xFF0392CF),
@@ -99,7 +102,7 @@ class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
                                 // An action can be bigger than the others.
                                 flex: 1,
                                 onPressed: (context) {
-                                  widget.deleteItem(index, data.id ?? '');
+                                  widget.deleteItem(index, data.id);
                                 },
                                 backgroundColor: Colors.red,
                                 foregroundColor: Colors.white,
@@ -121,8 +124,8 @@ class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Name: ${data.item}"),
-                                    Text("Value: ${data.quantity.toString()}"),
+                                    Text("First Name : ${data.firstName}"),
+                                    Text("Last Name : ${data.lastName}"),
                                   ],
                                 ),
                               ),
@@ -142,22 +145,23 @@ class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
   void _showInputDialog({
     bool isEdit = false,
     int index = 0,
-    TodoModel? todoModel,
+    UserModelData? userModel,
   }) {
-    TextEditingController nameController = TextEditingController(
-      text: isEdit ? todoModel?.item : '',
+    TextEditingController firstNameController = TextEditingController(
+      text: isEdit ? userModel?.firstName : '',
     );
-    TextEditingController valueController = TextEditingController(
-      text: isEdit ? todoModel?.quantity.toString() : '',
+    TextEditingController lastNameController = TextEditingController(
+      text: isEdit ? userModel?.lastName.toString() : '',
     );
+
     final formKey = GlobalKey<FormState>();
 
     var content = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         TextFormField(
-          controller: nameController,
-          decoration: InputDecoration(labelText: 'Name'),
+          controller: firstNameController,
+          decoration: InputDecoration(labelText: 'Firstname'),
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
               return 'Please enter first name';
@@ -166,11 +170,11 @@ class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
           },
         ),
         TextFormField(
-          controller: valueController,
-          decoration: InputDecoration(labelText: 'Value'),
+          controller: lastNameController,
+          decoration: InputDecoration(labelText: 'Lastname'),
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
-              return 'Please enter value';
+              return 'Please enter last name';
             }
             return null;
           },
@@ -186,19 +190,13 @@ class _HiveTodoListComponentState extends State<HiveTodoListComponent> {
           content: content,
           formKey: formKey,
           submit: () {
-            var model = todoModel?.copyWith(
-              item: nameController.text,
-              quantity: int.parse(valueController.text),
+            var model = UserModelData(
+              firstName: firstNameController.text,
+              lastName: lastNameController.text,
+              id: userModel?.id ?? -1,
             );
 
-            isEdit
-                ? widget.editItem(model!, index)
-                : widget.addItem(
-                  TodoModel(
-                    item: nameController.text,
-                    quantity: int.parse(valueController.text),
-                  ),
-                );
+            isEdit ? widget.editItem(model, index) : widget.addItem(model);
           },
         );
       },

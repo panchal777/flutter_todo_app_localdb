@@ -21,6 +21,11 @@ class DashboardModel {
         routName: RouteName.drift,
         color: Colors.blueGrey.shade100,
       ),
+      DashboardModel(
+        label: "Isar",
+        routName: RouteName.isar,
+        color: Colors.deepPurple.shade100,
+      ),
     ];
   }
 }

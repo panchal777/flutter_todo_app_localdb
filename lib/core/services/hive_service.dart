@@ -3,7 +3,6 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../feature/model/todo_model.dart';
 
-
 class HiveService {
   static final HiveService _instance = HiveService._internal();
 
